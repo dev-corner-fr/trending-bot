@@ -1,17 +1,19 @@
 {
-  "name": "bot_trend",
+  "name": "trending-bot",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "discord.js": "^12.1.1",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Ynohtna, Nemesis",
-  "license": "ISC"
+  "author": "ElsassDev",
+  "license": "MIT"
 }
