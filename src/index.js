@@ -4,6 +4,7 @@ const client = new Client()
 const prefix = '!'
 
 const producthunt = require('./modules/producthunt')
+const github = require('./modules/github')
 
 client.once('ready', () => console.log('Ready!'))
 
@@ -16,6 +17,12 @@ client.on('message', async message => {
   if (command === 'ph') {
     const embed = await producthunt()
     
+    message.channel.send(embed)
+  }
+
+  if (command === 'gh') {
+    const embed = await github()
+
     message.channel.send(embed)
   }
 })
