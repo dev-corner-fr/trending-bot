@@ -1,4 +1,14 @@
 # trending-bot
+Receive trending content directly on Discord.
+
+---
+
+## Preview
+
+![ProductHunt](.github/producthunt.png)
+![Reddit](.github/reddit.png)
+![GitHub](.github/github.png)
+![Dev.to](.github/devto.png)
 
 ## Installation
 
@@ -28,9 +38,13 @@ $ npm start
 
 ### ProductHunt
 
-1. Create an application
-2. Create a developer token
-3. Set the `Token` to the `TOKEN_PRODUCTHUNT` environment variable
+1. Go to https://api.producthunt.com/v2/oauth/applications
+2. Create an application
+3. Create a developer token
+4. Set the `Token` to the `TOKEN_PRODUCTHUNT` environment variable
+
+![ProductHunt instructions](./.github/producthunt-instructions.png)
+
 
 ### Reddit
 
@@ -42,7 +56,7 @@ $ npm start
 6. Set your Reddit password to the `REDDIT_PASSWORD` environment variable
 
 
-![clientId](./.github/reddit.png)
+![Reddit instructions](./.github/reddit-instructions.png)
 
 ### GitHub
 
