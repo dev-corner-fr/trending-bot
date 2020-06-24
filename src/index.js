@@ -24,10 +24,10 @@ async function sendTrendingPosts () {
   ]
 
   const results = await Promise.all(trendingFetches)
-
+  
+  const channel = client.channels.cache.get(config.trendingChannelId)
+  
   for (const embed of results) {
-    const channel = client.channels.cache.get(config.trendingChannelId)
-
     channel.send(embed)
   }
 }
