@@ -3,9 +3,7 @@ const { Client, ClientUser } = require('discord.js')
 const CronJob = require('cron').CronJob
 
 const config = require('../config')
-
 const client = new Client()
-const prefix = '!'
 
 const producthunt = require('./modules/producthunt')
 const github = require('./modules/github')
