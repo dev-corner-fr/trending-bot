@@ -1,5 +1,9 @@
 require('dotenv').config()
-const { Client } = require('discord.js')
+const { Client, ClientUser } = require('discord.js')
+const CronJob = require('cron').CronJob
+
+const config = require('../config')
+
 const client = new Client()
 const prefix = '!'
 
@@ -10,35 +14,24 @@ const reddit = require('./modules/reddit')
 
 client.once('ready', () => console.log('Ready!'))
 
-client.on('message', async message => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return
+const job = new CronJob('0 0 20 * * *', sendTrendingPosts)
+  .start()
 
-  const args = message.content.slice(prefix.length).split(/ +/)
-  const command = args.shift().toLowerCase()
+async function sendTrendingPosts () {
+  const trendingFetches = [
+    producthunt(),
+    github(),
+    devto(),
+    reddit()
+  ]
 
-  if (command === 'ph') {
-    const embed = await producthunt()
-    
-    message.channel.send(embed)
+  const results = await Promise.all(trendingFetches)
+
+  for (const embed of results) {
+    const channel = client.channels.cache.get(config.trendingChannelId)
+
+    channel.send(embed)
   }
-
-  if (command === 'gh') {
-    const embed = await github()
-
-    message.channel.send(embed)
-  }
-
-  if (command === 'dt') {
-    const embed = await devto()
-
-    message.channel.send(embed)
-  }
-
-  if (command === 'rd') {
-    const embed = await reddit()
-
-    message.channel.send(embed)
-  }
-})
+}
 
 client.login(process.env.TOKEN_DISCORD_BOT)
