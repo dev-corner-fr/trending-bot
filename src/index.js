@@ -11,7 +11,15 @@ if (!config.trendingChannelId) {
 
 const modules = require('./modules')
 
-client.once('ready', () => console.log('Ready!'))
+client.once('ready', () => {
+  console.log('Ready!')
+  client.user.setPresence({
+    activity: {
+      type: 'WATCHING',
+      name: 'trending posts'
+    }
+  })
+})
 
 const job = new CronJob('0 0 20 * * *', sendTrendingPosts)
   .start()
