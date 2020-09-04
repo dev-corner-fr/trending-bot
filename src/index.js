@@ -30,6 +30,4 @@ async function sendTrendingPosts () {
   channel.send(`That's all for today folks ! :man_technologist: :woman_technologist: `)
 }
 
-sendTrendingPosts()
-
 client.login(process.env.TOKEN_DISCORD_BOT)
