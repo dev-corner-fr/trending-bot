@@ -9,10 +9,7 @@ if (!config.trendingChannelId) {
   throw new Error('"config.trendingChannelId" is empty, it should be a channel id.')
 }
 
-const producthunt = require('./modules/producthunt')
-const github = require('./modules/github')
-const devto = require('./modules/devto')
-const reddit = require('./modules/reddit')
+const modules = require('./modules')
 
 client.once('ready', () => console.log('Ready!'))
 
@@ -20,12 +17,7 @@ const job = new CronJob('0 0 20 * * *', sendTrendingPosts)
   .start()
 
 async function sendTrendingPosts () {
-  const trendingFetches = [
-    producthunt(),
-    github(),
-    devto(),
-    reddit()
-  ]
+  const trendingFetches = modules.map(module => module())
 
   const results = await Promise.all(trendingFetches)
   
@@ -37,5 +29,7 @@ async function sendTrendingPosts () {
 
   channel.send(`That's all for today folks ! :man_technologist: :woman_technologist: `)
 }
+
+sendTrendingPosts()
 
 client.login(process.env.TOKEN_DISCORD_BOT)
